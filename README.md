@@ -38,17 +38,26 @@ The results of the tabu search algorithm from [`doi: 10.1007/s10878-018-0254-1`]
 ### Solution methods
 
 
-* [`Heuristic`](Heuristic): Results of the three-phase algorithm. Outputs are formatted under the name `Out_n_k-s.xlsx`, where $s$ identifies the subset label (possible values $s \in \{\text{A},\text{B},\text{C},\text{D}\}$).
+Jupyter notebooks with code for solving the instances are included (Tables 3—5). 
 
-* [`Fix Heuristic`](Fix%20Heuristic):
+
+* [`IVPRP testing - Iterative.ipynb`](IVPRP%20testing%20-%20Iterative.ipynb): Applies _MIP Solve_ iteratively.
+* [IVPRP testing - 3P Algorithm.ipynb](IVPRP%20testing%20-%203P%20Algorithm.ipynb): Applies three phase heuristic to a selected partition of an instance.
+* [IVPRP testing - Fixing.ipynb](IVPRP%20testing%20-%20Fixing.ipynb): Applies fixing result to an instance where additional information is known.
+
+Three folders collect the results.
+
+
+* [`Sol MIP`](Sol%20MIP): Results of _MIP Solve_. Outputs are formatted as `Out_n.xlsx`.
+
+* [`Sol Heuristic`](Sol%20Heuristic): Results of the three-phase algorithm. Outputs are formatted under the name `Out_n_k-s.xlsx`, where $s$ identifies the subset label (possible values $s \in \{\text{A},\text{B},\text{C},\text{D}\}$).
+
+* [`Sol Fix Heuristic`](Sol%20Fix%20Heuristic):
 The _Fixing Variables Heuristic_ adds bounds from the Heuristic solve to full MIP model. The bounds for $n\geq 12$ are included in format `Fixing_n_k.txt`. The corresponding results are included in the files with format `Out_Fixing_n_k.xlsx`.
 
 
 
-Most of the reported results were obtained using Gurobi 8.
 
-
-Jupyter notebooks with code for [...] are included. 
 
 
 

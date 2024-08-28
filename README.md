@@ -42,8 +42,8 @@ Jupyter notebooks with code for solving the instances are included (Tables 3—5
 
 
 * [`IVPRP testing - Iterative.ipynb`](IVPRP%20testing%20-%20Iterative.ipynb): Applies _MIP Solve_ iteratively.
-* [IVPRP testing - 3P Algorithm.ipynb](IVPRP%20testing%20-%203P%20Algorithm.ipynb): Applies three phase heuristic to a selected partition of an instance.
-* [IVPRP testing - Fixing.ipynb](IVPRP%20testing%20-%20Fixing.ipynb): Applies fixing result to an instance where additional information is known.
+* [`IVPRP testing - 3P Algorithm.ipynb`](IVPRP%20testing%20-%203P%20Algorithm.ipynb): Applies three phase heuristic to a selected partition of an instance.
+* [`IVPRP testing - Fixing.ipynb`](IVPRP%20testing%20-%20Fixing.ipynb): Applies fixing result to an instance where additional information is known.
 
 Three folders collect the results.
 

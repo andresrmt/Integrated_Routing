@@ -38,6 +38,10 @@ The results of the tabu search algorithm from [`doi: 10.1007/s10878-018-0254-1`]
 ### Solution methods
 
 
+* [`Fix Heuristic`](Fix%20Heuristic):
+The _Fixing Variables Heuristic_ adds bounds from the Heuristic solve to full MIP model. The bounds for $n\geq 12$ are included in format `Fixing_n_k.txt`. The corresponding results are included in the files with format `Out_Fixing_n_k.xlsx`.
+
+
 
 Most of the reported results were obtained using Gurobi 8.
 

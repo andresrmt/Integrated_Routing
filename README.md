@@ -31,6 +31,10 @@ Each instance with $n$ stores consists of the following files:
 | `Time_n.txt`     |   | The first row of this file is the time range for taking breaks,  and the second row is the length of the break and shift length.                                            |
 
 
+The results of the tabu search algorithm from [`doi: 10.1007/s10878-018-0254-1`](https://doi.org/10.1007/s10878-018-0254-1) are included for each instance under the format `Partition_n_k.txt` where $k$ is the number of clusters of the $k$–way partition.
+
+
+
 ### Solution methods
 
 

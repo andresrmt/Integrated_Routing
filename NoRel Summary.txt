@@ -1,0 +1,158 @@
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 10  ***
+
+Optimal
+A solution was found after 3.0850 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 3.1532 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 3.2338 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 3.0253 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.8926 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.8642 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.8677 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.9173 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.8859 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 2.8919 s with 2 pollsters, 2 vehicles, and 1 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 12  ***
+
+Optimal
+A solution was found after 6.7090 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.3716 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.3712 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.4024 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.4151 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.5302 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.4582 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.4809 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.5095 s with 2 pollsters, 2 vehicles, and 1 days.
+A solution was found after 6.5157 s with 2 pollsters, 2 vehicles, and 1 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 14  ***
+
+820
+A solution was found after 130.0377 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0450 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0437 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0346 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0122 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0421 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0375 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0345 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0391 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0347 s with 2 pollsters, 2 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 16  ***
+
+760
+A solution was found after 130.0098 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0079 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0080 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0665 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0076 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0093 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0086 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0086 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0080 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0272 s with 2 pollsters, 1 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 18  ***: This was the only case where a subsequent round of B&B actually finds additional solutions
+
+900
+A solution was found after 130.0093 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0082 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0091 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0118 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0088 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0099 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0077 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0110 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0109 s with 3 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0076 s with 3 pollsters, 2 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 20  ***
+
+560
+A solution was found after 130.0366 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0581 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0636 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0412 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0361 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0339 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0341 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0310 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0353 s with 4 pollsters, 2 vehicles, and 1 days.
+A solution was found after 130.0331 s with 4 pollsters, 2 vehicles, and 1 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 25  ***
+
+760
+A solution was found after 130.0072 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0119 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0106 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0096 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0109 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0099 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0133 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0085 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0079 s with 2 pollsters, 1 vehicles, and 2 days.
+A solution was found after 130.0136 s with 2 pollsters, 1 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 30  ***
+
+960 
+A solution was found after 130.0127 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0134 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0140 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0134 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0101 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0149 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0115 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0105 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0116 s with 2 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0140 s with 2 pollsters, 2 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 40  ***
+
+1120 
+A solution was found after 130.0195 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0148 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0160 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0390 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0148 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0150 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0142 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0146 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0199 s with 4 pollsters, 2 vehicles, and 2 days.
+A solution was found after 130.0171 s with 4 pollsters, 2 vehicles, and 2 days.
+
+––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+*** Solving instance of size: 50  ***
+
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0
+Solution count 0

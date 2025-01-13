@@ -14,11 +14,7 @@ _The Integrated Vehicle and Pollster Routing Problem_ by Sandra Gutiérrez, Andr
 
 ### Simulated instances: 
 
-* [`Points of Interest.ipynb`](Points%20of%20Interest.ipynb): Samples 467 points of interest from OpenStreetMaps using OSMnx (2019). The code relies on the [`connect_poi.py`](connect_poi.py) file based on a previous version of Yuwen Chang's code in
-[`ywnch/toolbox`](https://github.com/ywnch/toolbox/tree/e5c0b59556d4346cb4de6f716eaa0b9d2d9f354c).
-Data is stored in [`poi.gpkg`](poi.gpkg) and summary is available at [`poi.xlsx`](poi.xlsx). [Documentation in Spanish]
-
-* [`Sampling.ipynb`](Sampling.ipynb): Artificial instance generator uses data from the points of interest collected in `poi.gpkg` to generate an instance with η stores. [Documentation in Spanish]
+* [`Sampling.ipynb`](Sampling.ipynb): Artificial instance generator uses data from the points of interest collected in `Sampling_Data` to generate an instance with η stores. The code also showcases how to build the dataset from scratch using OpenStreetMaps data and OSMnx 2.0.
 
 The last file was used to generate the [`Instances`](Instances) folder. Here we find different instances of the IVPRP.
 Each instance with $n$ stores consists of the following files:

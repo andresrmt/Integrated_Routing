@@ -1,6 +1,12 @@
 # Yuwen Chang
 # 2019-04-16
 
+# Updated by Andrés MT
+# 2024-12-16
+
+# Yuwen Chang
+# 2020-08-16
+
 import numpy as np
 import pandas as pd
 import geopandas as gpd
@@ -13,12 +19,15 @@ from shapely.ops import snap, split
 
 pd.options.mode.chained_assignment = None
 
-def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=5):
+
+def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=5, meter_epsg=3857):
     """Connect and integrate a set of POIs into an existing road network.
+
     Given a road network in the form of two GeoDataFrames: nodes and edges,
     link each POI to the nearest edge (road segment) based on its projection
     point (PP) and generate a new integrated road network including the POIs,
     the projected points, and the connection edge.
+
     Args:
         pois (GeoDataFrame): a gdf of POI (geom: Point)
         nodes (GeoDataFrame): a gdf of road network nodes (geom: Point)
@@ -41,15 +50,17 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
                    Consider increasing this number up to 10 if the connection
                    output is slightly unreasonable. But higher knn number will
                    slow down the process.
+        meter_epsg (int): preferred EPSG in meter units. Suggested 3857 or 3395.
+
     Returns:
         nodes (GeoDataFrame): the original gdf with POIs and PPs appended
         edges (GeoDataFrame): the original gdf with connection edges appended
                               and existing edges updated (if PPs are present)
+
     Note:
         1. Make sure all three input GeoDataFrames have defined crs attribute.
-           Try something like `gdf.crs` or `gdf.crs = {'init': 'epsg:4326'}`.
-           They will then be converted into epsg:3857 for processing.
-           # pois.crs.to_epsg()
+           Try something like `gdf.crs` or `gdf.crs = 'epsg:4326'`.
+           They will then be converted into epsg:3857 or specified meter_epsg for processing.
     """
 
     ## STAGE 0: initialization
@@ -69,6 +80,7 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
 
     def split_line(line, pps):
         """Split 'line' by all intersecting 'pps' (as multipoint).
+
         Returns:
             new_lines (list): a list of all line segments after the split
         """
@@ -84,7 +96,7 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
             print('Error when splitting line: {}\n{}\n{}\n'.format(e, line, pps))
             return []
 
-    def update_nodes(nodes, new_points, ptype):
+    def update_nodes(nodes, new_points, ptype, meter_epsg=3857):
         """Update nodes with a list (pp) or a GeoDataFrame (poi) of new_points.
         
         Args:
@@ -92,21 +104,17 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
         """
         # create gdf of new nodes (projected PAPs)
         if ptype == 'pp':
-            #new_nodes = gpd.GeoDataFrame(new_points, columns=['geometry'], crs={'init': 'epsg:3857'})
-            new_nodes = gpd.GeoDataFrame(new_points, columns=['geometry'])
-            new_nodes.crs = 'epsg:3857'
-            new_nodes = new_nodes.to_crs('epsg:3857')
-            # '+init=<authority>:<code>' syntax is deprecated. '<authority>:<code>'
+            new_nodes = gpd.GeoDataFrame(new_points, columns=['geometry'], crs=f'epsg:{meter_epsg}')
             n = len(new_nodes)
             new_nodes['highway'] = node_highway_pp
-            new_nodes['osmid'] = [str(osmid_prefix + i) for i in range(n)]
+            new_nodes['osmid'] = [int(osmid_prefix + i) for i in range(n)]
 
         # create gdf of new nodes (original POIs)
         elif ptype == 'poi':
             new_nodes = new_points[['geometry', key_col]]
-            new_nodes.columns    = ['geometry', 'osmid']
+            new_nodes.columns = ['geometry', 'osmid']
             new_nodes['highway'] = node_highway_poi
-            new_nodes['osmid']   = new_nodes['osmid'].astype(str, copy=False)
+            new_nodes['osmid'] = new_nodes['osmid'].astype(int)
 
         else:
             print("Unknown ptype when updating nodes.")
@@ -122,6 +130,7 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
         """
         Update edge info by adding new_lines; or,
         replace existing ones with new_lines (n-split segments).
+
         Args:
             replace: treat new_lines (flat list) as newly added edges if False,
                      else replace existing edges with new_lines (often a nested list)
@@ -140,24 +149,22 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
             # merge to inherit the data of the replaced line
             cols = list(edges.columns)
             cols.remove('geometry')  # don't include the old geometry
-            new_edges = new_lines_gdf.merge(edges[cols], how='left',
-                                            left_on='kne_idx', right_index=True)
+            new_edges = new_lines_gdf.merge(edges[cols], how='left', left_on='kne_idx', right_index=True)
             new_edges.drop('kne_idx', axis=1, inplace=True)
             new_lines = new_edges['geometry']  # now a flatten list
         # for connection (to external poi): append new lines
         else:
-            new_edges = gpd.GeoDataFrame(pois[[key_col]], geometry=new_lines,
-                                         columns=[key_col, 'geometry'])
+            new_edges = gpd.GeoDataFrame(pois[[key_col]], geometry=new_lines, columns=[key_col, 'geometry'])
             new_edges['oneway'] = False
             new_edges['highway'] = edge_highway
 
         # update features (a bit slow)
         new_edges['length'] = [l.length for l in new_lines]
-        
-        new_edges['from'] = new_edges['geometry'].map(lambda x: nodes_id_dict.get(list(x.coords)[0], 'None'))
-        new_edges['to']   = new_edges['geometry'].map(lambda x: nodes_id_dict.get(list(x.coords)[-1], 'None'))
-        
-        new_edges['osmid'] = ['_'.join(s) for s in zip(new_edges['from'],new_edges['to'])]
+        new_edges['from'] = new_edges['geometry'].map(
+            lambda x: nodes_id_dict.get(list(x.coords)[0], None))
+        new_edges['to'] = new_edges['geometry'].map(
+            lambda x: nodes_id_dict.get(list(x.coords)[-1], None))
+        new_edges['osmid'] = ['_'.join(list(map(str, s))) for s in zip(new_edges['from'], new_edges['to'])]
 
         # remember to reindex to prevent duplication when concat
         start = edges.index[-1] + 1
@@ -173,15 +180,12 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
             n = len(new_edges)
             n_fault = n - len(valid_pos)
             f_pct = n_fault / n * 100
-            print("Eliminando proyecciones fallidas: {}/{} ({:.2f}%)".format(n_fault,
-                                                                      n,
-                                                                      f_pct))
+            print("Remove faulty projections: {}/{} ({:.2f}%)".format(n_fault, n, f_pct))
             new_edges = new_edges.iloc[valid_pos]  # use 'iloc' here
 
         # merge new edges
         dfs = [edges, new_edges]
-        edges = gpd.GeoDataFrame(pd.concat(dfs, ignore_index=False, sort=False),
-                                 crs=dfs[0].crs)
+        edges = gpd.GeoDataFrame(pd.concat(dfs, ignore_index=False, sort=False), crs=dfs[0].crs)
 
         # all edges, newly added edges only
         return edges, new_edges
@@ -194,60 +198,51 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
     osmid_prefix = 9990000000
 
     # convert CRS
-    pois_meter = pois.to_crs(epsg=3857)
-    nodes_meter = nodes.to_crs(epsg=3857)
-    edges_meter = edges.to_crs(epsg=3857)
+    pois_meter = pois.to_crs(epsg=meter_epsg)
+    nodes_meter = nodes.to_crs(epsg=meter_epsg)
+    edges_meter = edges.to_crs(epsg=meter_epsg)
 
     # build rtree
-    print("Construyendo rtree...")
-    
+    print("Building rtree...")
     Rtree = rtree.index.Index()
-    [Rtree.insert(fid, geom.bounds) for fid, geom in
-     edges_meter['geometry'].iteritems()];
+    [Rtree.insert(fid, geom.bounds) for fid, geom in edges_meter['geometry'].items()]
 
     ## STAGE 1: interpolation
     # 1-1: update external nodes (pois)
-    print("Actualizando nodos externos...")
-    nodes_meter, _ = update_nodes(nodes_meter, pois_meter, ptype='poi')
+    print("Updating external nodes...")
+    nodes_meter, _ = update_nodes(nodes_meter, pois_meter, ptype='poi', meter_epsg=meter_epsg)
 
     # 1-2: update internal nodes (interpolated pps)
     # locate nearest edge (kne) and projected point (pp)
-    print("Proyectando POIs a la red...")
-    pois_meter['near_idx'] = [list(Rtree.nearest(point.bounds, knn)) for point in
-                              pois_meter['geometry']]  # slow
-    pois_meter['near_lines'] = [edges_meter['geometry'][near_idx] for near_idx in
-                                pois_meter['near_idx']]  # very slow
+    print("Projecting POIs to the network...")
+    pois_meter['near_idx'] = [list(Rtree.nearest(point.bounds, knn))
+                              for point in pois_meter['geometry']]  # slow
+    pois_meter['near_lines'] = [edges_meter['geometry'][near_idx]
+                                for near_idx in pois_meter['near_idx']]  # very slow
     pois_meter['kne_idx'], knes = zip(
         *[find_kne(point, near_lines) for point, near_lines in
           zip(pois_meter['geometry'], pois_meter['near_lines'])])  # slow
-    pois_meter['pp'] = [get_pp(point, kne) for point, kne in
-                        zip(pois_meter['geometry'], knes)]
+    pois_meter['pp'] = [get_pp(point, kne) for point, kne in zip(pois_meter['geometry'], knes)]
 
     # update nodes
-    print("Actualizando nodos internos...")
-    
-    nodes_meter, _ = update_nodes(nodes_meter, list(pois_meter['pp']), ptype='pp')
+    print("Updating internal nodes...")
+    nodes_meter, _ = update_nodes(nodes_meter, list(pois_meter['pp']), ptype='pp', meter_epsg=meter_epsg)
     nodes_coord = nodes_meter['geometry'].map(lambda x: x.coords[0])
-    
-    nodes_id_dict = dict(zip(nodes_coord, nodes_meter['osmid'].astype('str')))
+    nodes_id_dict = dict(zip(nodes_coord, nodes_meter['osmid'].astype('Int64')))
 
     # 1-3: update internal edges (split line segments)
-    print("Actualizando aristas internas...")
+    print("Updating internal edges...")
     # split
-    line_pps_dict = {k: MultiPoint(list(v)) for k, v in
-                     pois_meter.groupby(['kne_idx'])['pp']}
-    
-    new_lines = [split_line(edges_meter['geometry'][idx], pps) for idx, pps in
-                 line_pps_dict.items()]  # bit slow
+    line_pps_dict = {k: MultiPoint(list(v)) for k, v in pois_meter.groupby(['kne_idx'])['pp']}
+    new_lines = [split_line(edges_meter['geometry'][idx], pps) for idx, pps in line_pps_dict.items()]  # bit slow
     edges_meter, _ = update_edges(edges_meter, new_lines, replace=True)
 
     ## STAGE 2: connection
     # 2-1: update external edges (projected footways connected to pois)
     # establish new_edges
-    print("Actualizando enlaces externos...")
+    print("Updating external links...")
     pps_gdf = nodes_meter[nodes_meter['highway'] == node_highway_pp]
-    new_lines = [LineString([p1, p2]) for p1, p2 in
-                 zip(pois_meter['geometry'], pps_gdf['geometry'])]
+    new_lines = [LineString([p1, p2]) for p1, p2 in zip(pois_meter['geometry'], pps_gdf['geometry'])]
     edges_meter, _ = update_edges(edges_meter, new_lines, replace=False)
 
     ## STAGE 3: output
@@ -266,12 +261,12 @@ def connect_poi(pois, nodes, edges, key_col=None, path=None, threshold=200, knn=
     # report issues
     # - examine key duplication
     if len(nodes_meter) != len(nodes_id_dict):
-        print("** Nota **: duplicación en llaves de coordenadas para los nodos")
-        print("Número de nodos:", len(nodes_meter))
-        print("Número de llaves de coordenadas:", len(nodes_id_dict))
+        print("NOTE: duplication in node coordinates keys")
+        print("Nodes count:", len(nodes_meter))
+        print("Node coordinates key count:", len(nodes_id_dict))
     # - examine missing nodes
-    print("Nodos 'from' perdidos:", len(edges[edges['from'] == 'None']))
-    print("Nodos 'to' perdidos:  ", len(edges[edges['to'] == 'None']))
+    print("Missing 'from' nodes:", len(edges[edges['from'] == None]))
+    print("Missing 'to' nodes:", len(edges[edges['to'] == None]))
 
     # save and return
     if path:

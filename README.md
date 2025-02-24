@@ -52,8 +52,14 @@ Three folders collect the results.
 The _Fixing Variables Heuristic_ adds bounds from the Heuristic solve to full MIP model. The bounds for $n\geq 12$ are included in format `Fixing_n_k.txt`. The corresponding results are included in the files with format `Out_Fixing_n_k.xlsx`.
 
 
+Additional files:
+
+* [`IVPRP - Bounds [Iterative]`](IVPRP%20-%20Bounds%20%5BIterative%5D.ipynb): Computes lower and upper bounds for each instance.
 
 
+## Self-contained tests
+
+* [`IVPRP - Example`](IVPRP%20-%20Example.ipynb): Solves the example instance from the data of Table 2.
 
 
 

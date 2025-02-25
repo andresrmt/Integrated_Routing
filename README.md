@@ -56,7 +56,7 @@ Additional files and folders:
 
 * [`IVPRP - Bounds [Iterative]`](IVPRP%20-%20Bounds%20%5BIterative%5D.ipynb): Computes lower and upper bounds for each instance.
 * [`Tabu`](Tabu): `C++` code with the KPART Tabu search heuristic for partitioning an instance. The folder is self-contained. To test the code, change $n$ (number of stores) and $k$ (number of partitions, should be even for 3P heuristic). For a given $n$, it is expected that the files `Service_n.txt` and `Pollster_n.txt` are available in the subfolder [`Tabu/data`](Tabu/data); where `Service_n.txt` ought not to have an entry for the depot. 
-The code is based on the original KPART for weighted balanced $k$-clique partitioning, which first appeared at [`doi:10.1007/978-3-319-45587-7_31`](https://doi.org/10.1007/978-3-319-45587-7_31) and later at [`doi:10.1007/s10878-018-0254-1`](https://doi.org/10.1007/s10878-018-0254-1) and [`doi:10.17632/7yypjxy4f7.1`](http://dx.doi.org/10.17632/7yypjxy4f7.1).
+The code is based on the original KPART for weighted balanced $k$-clique partitioning, which first appeared at [`doi:10.1007/978-3-319-45587-7_31`](https://doi.org/10.1007/978-3-319-45587-7_31) and later at [`doi:10.1007/s10878-018-0254-1`](https://doi.org/10.1007/s10878-018-0254-1) and [`doi:10.17632/7yypjxy4f7.1`](http://dx.doi.org/10.17632/7yypjxy4f7.1). The associated files were last tested using `Xcode 16.2` and `GNU++11`.
 
 
 ## Self-contained tests

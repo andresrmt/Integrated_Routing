@@ -52,9 +52,11 @@ Three folders collect the results.
 The _Fixing Variables Heuristic_ adds bounds from the Heuristic solve to full MIP model. The bounds for $n\geq 12$ are included in format `Fixing_n_k.txt`. The corresponding results are included in the files with format `Out_Fixing_n_k.xlsx`.
 
 
-Additional files:
+Additional files and folders:
 
 * [`IVPRP - Bounds [Iterative]`](IVPRP%20-%20Bounds%20%5BIterative%5D.ipynb): Computes lower and upper bounds for each instance.
+* [`Tabu`](Tabu): `C++` code with the KPART Tabu search heuristic for partitioning an instance. The folder is self-contained. To test the code, change $n$ (number of stores) and $k$ (number of partitions, should be even for 3P heuristic). For a given $n$, it is expected that the files `Service_n.txt` and `Pollster_n.txt` are available in the subfolder [`Tabu/data`](Tabu/data); where `Service_n.txt` ought not to have an entry for the depot. 
+The code is based on the original KPART for weighted balanced $k$-clique partitioning, which first appeared at [`doi:10.1007/978-3-319-45587-7_31`](https://doi.org/10.1007/978-3-319-45587-7_31) and later at [`doi:10.1007/s10878-018-0254-1`](https://doi.org/10.1007/s10878-018-0254-1) and [`doi:10.17632/7yypjxy4f7.1`](http://dx.doi.org/10.17632/7yypjxy4f7.1).
 
 
 ## Self-contained tests

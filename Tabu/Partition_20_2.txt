@@ -1,0 +1,9 @@
+
+
+Best solution with cost 1013.25:
+  Cluster 1:
+1  2  3  6  7  8  12  14  17  19  
+  nodes in clique= 10 with weight = 86
+  Cluster 2:
+4  5  9  10  11  13  15  16  18  20  
+  nodes in clique= 10 with weight = 94
